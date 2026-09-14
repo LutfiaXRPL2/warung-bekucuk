@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warung Bekucuk - Spesialis Kereca & Kuliner Lezat</title>
+    <!-- Google Fonts & Font Awesome for Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #d9534f;
+            --secondary-color: #ff9800;
+            --dark-color: #2c3e50;
+            --light-color: #f8f9fa;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f9;
+            color: #333;
+            padding-bottom: 80px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+
+        header p {
+            font-size: 1.1rem;
+        }
+
+        /* Layout Container */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .category-title {
+            border-left: 5px solid var(--primary-color);
+            padding-left: 10px;
+            margin: 30px 0 20px;
+            color: var(--dark-color);
+        }
+
+        /* Highlight Specialty Card */
+        .featured-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+            border: 2px solid var(--secondary-color);
+        }
+
+        .featured-item img {
+            width: 100%;
+            max-width: 450px;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .featured-details {
+            padding: 25px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .badge-main {
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            width: fit-content;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        /* Grid System for Products */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 15px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .product-price {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        /* Controls: Quantity & Type */
+        .product-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .product-options select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #eee;
+            border-radius: 5px;
+            padding: 3px;
+        }
+
+        .quantity-control button {
+            background: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .quantity-control span {
+            font-weight: 600;
+        }
+
+        .btn-add {
+            background: var(--dark-color);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .btn-add:hover {
+            background: var(--primary-color);
+        }
+
+        /* Floating Cart Bar */
+        .cart-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 -3px 10px rgba(0,0,0,0.15);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .cart-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .cart-icon {
+            position: relative;
+            font-size: 1.5rem;
+            color: var(--dark-color);
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background: var(--primary-color);
+            color: white;
+            font-size: 0.75rem;
+            padding: 2px 6px;
+            border-radius: 50%;
+        }
+
+        .btn-checkout {
+            background: #25D366; /* WhatsApp Color */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .btn-checkout:hover {
+            background: #1ebc57;
+        }
+
+        /* Cart Modal Drawer */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            border-bottom: 1px dashed #ddd;
+            padding-bottom: 10px;
+        }
+
+        .cart-item-detail {
+            font-size: 0.9rem;
+        }
+
+        .cart-item-title {
+            font-weight: 600;
+        }
+
+        .cart-item-price {
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .btn-remove {
+            color: red;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Form Pelanggan */
+        .customer-form {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .customer-form input, .customer-form textarea {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .featured-item img {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Warung Bekucuk</h1>
+        <p>Nikmati Kereca Khas dan Berbagai Sajian Kuliner Mantap!</p>
+    </header>
+
+    <div class="container">
+        
+        <!-- Menu Utama / Unggulan -->
+        <h2 class="category-title">Menu Utama (Unggulan)</h2>
+        <div class="featured-item">
+            <img src="https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?auto=format&fit=crop&w=600&q=80" alt="Kereca">
+            <div class="featured-details">
+                <span class="badge-main">Spesial / Rekomendasi</span>
+                <h2>Kereca Bekucuk</h2>
+                <p style="color:#666; margin: 10px 0;">Olahan Kereca khas Warung Bekucuk dengan bumbu rempah pilihan yang meresap sempurna, gurih, dan bikin ketagihan.</p>
+                <div class="product-price" style="font-size:1.3rem;">Rp 15.000</div>
+                
+                <div class="quantity-control" style="width: 150px; margin-bottom: 15px;">
+                    <button onclick="changeQty('qty-main', -1)">-</button>
+                    <span id="qty-main">1</span>
+                    <button onclick="changeQty('qty-main', 1)">+</button>
+                </div>
+                <button class="btn-add" onclick="addToCart('Kereca Bekucuk', 15000, 'qty-main')">
+                    <i class="fa-solid fa-cart-plus"></i> Tambah Kereca Ke Keranjang
+                </button>
+            </div>
+        </div>
+
+        <!-- Makanan Lainnya -->
+        <h2 class="category-title">Makanan Lezat</h2>
+        <div class="product-grid">
+            
+            <!-- Cumi Hitam -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=500&q=80" alt="Cumi Hitam">
+                <div class="product-info">
+                    <div>
+                        <div class="product-title">Cumi Hitam Pedas</div>
+                        <div class="product-price">Rp 20.000</div>
+                    </div>
+                    <div class="product-controls">
+                        <div class="quantity-control">
+                            <button onclick="changeQty('qty-cumi', -1)">-</button>
+                            <span id="qty-cumi">1</span>
+                            <button onclick="changeQty('qty-cumi', 1)">+</button>
+                        </div>
+                        <button class="btn-add" onclick="addToCart('Cumi Hitam Pedas', 20000, 'qty-cumi')">Tambah</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nasi Padang -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=500&q=80" alt="Nasi Padang">
+                <div class="product-info">
+                    <div>
+                        <div class="product-title">Nasi Padang Komplek</div>
+                        <div class="product-price">Rp 25.000</div>
+                    </div>
+                    <div class="product-controls">
+                        <div class="quantity-control">
+                            <button onclick="changeQty('qty-padang', -1)">-</button>
+                            <span id="qty-padang">1</span>
+                            <button onclick="changeQty('qty-padang', 1)">+</button>
+                        </div>
+                        <button class="btn-add" onclick="addToCart('Nasi Padang Komplek', 25000, 'qty-padang')">Tambah</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pangsit Ayam -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1496116218417-1a781b1c416c?auto=format&fit=crop&w=500&q=80" alt="Pangsit Ayam">
+                <div class="product-info">
+                    <div>
+                        <div class="product-title">Pangsit Ayam Goreng</div>
+                        <div class="product-price">Rp 10.000</div>
+                    </div>
+                    <div class="product-controls">
+                        <div class="quantity-control">
+                            <button onclick="changeQty('qty-pangsit', -1)">-</button>
+                            <span id="qty-pangsit">1</span>
+                            <button onclick="changeQty('qty-pangsit', 1)">+</button>
+                        </div>
+                        <button class="btn-add" onclick="addToCart('Pangsit Ayam Goreng', 10000, 'qty-pangsit')">Tambah</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Minuman -->
+        <h2 class="category-title">Minuman Segar & Hangat</h2>
+        <div class="product-grid">
+
+            <!-- Es Cincau -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1556881286-fc6915169721?auto=format&fit=crop&w=500&q=80" alt="Es Cincau">
+                <div class="product-info">
+                    <div>
+                        <div class="product-title">Es Cincau Segar</div>
+                        <div class="product-price">Rp 10.000</div>
+                    </div>
+                    <div class="product-controls">
+                        <div class="quantity-control">
+                            <button onclick="changeQty('qty-cincau', -1)">-</button>
+                            <span id="qty-cincau">1</span>
+                            <button onclick="changeQty('qty-cincau', 1)">+</button>
+                        </div>
+                        <button class="btn-add" onclick="addToCart('Es Cincau Segar', 10000, 'qty-cincau')">Tambah</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Es Garbis -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=500&q=80" alt="Es Garbis">
+                <div class="product-info">
+                    <div>
+                        <div class="product-title">Es Garbis Manis</div>
+                        <div class="product-price">Rp 10.000</div>
+                    </div>
+                    <div class="product-controls">
+                        <div class="quantity-control">
+                            <button onclick="changeQty('qty-garbis', -1)">-</button>
+                            <span id="qty-garbis">1</span>
+                            <button onclick="changeQty('qty-garbis', 1)">+</button>
+                        </div>
+                        <button class="btn-add" onclick="addToCart('Es Garbis Manis', 10000, 'qty-garbis')">Tambah</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Es Teh -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=500&q=80" alt="Es Teh">
+                <div class="product-info">
+                    <div>
+                        <div class="product-title">Teh (Panas / Dingin)</div>
+                        <div class="product-price">Rp 10.000</div>
+                    </div>
+                    <div class="product-controls">
+                        <div class="product-options">
+                            <select id="type-teh">
+                                <option value="Dingin (Es)">Dingin (Es)</option>
+                                <option value="Panas">Panas</option>
+                            </select>
+                        </div>
+                        <div class="quantity-control">
+                            <button onclick="changeQty('qty-teh', -1)">-</button>
+                            <span id="qty-teh">1</span>
+                            <button onclick="changeQty('qty-teh', 1)">+</button>
+                        </div>
+                        <button class="btn-add" onclick="addToCartWithOptions('Teh', 10000, 'qty-teh', 'type-teh')">Tambah</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Es Susu -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=500&q=80" alt="Susu">
+                <div class="product-info">
+                    <div>
+                        <div class="product-title">Susu (Panas / Dingin)</div>
+                        <div class="product-price">Rp 12.000</div>
+                    </div>
+                    <div class="product-controls">
+                        <div class="product-options">
+                            <select id="type-susu">
+                                <option value="Dingin (Es)">Dingin (Es)</option>
+                                <option value="Panas">Panas</option>
+                            </select>
+                        </div>
+                        <div class="quantity-control">
+                            <button onclick="changeQty('qty-susu', -1)">-</button>
+                            <span id="qty-susu">1</span>
+                            <button onclick="changeQty('qty-susu', 1)">+</button>
+                        </div>
+                        <button class="btn-add" onclick="addToCartWithOptions('Susu', 12000, 'qty-susu', 'type-susu')">Tambah</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kopi -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=500&q=80" alt="Kopi">
+                <div class="product-info">
+                    <div>
+                        <div class="product-title">Kopi Bekucuk</div>
+                        <div class="product-price">Rp 10.000</div>
+                    </div>
+                    <div class="product-controls">
+                        <div class="product-options">
+                            <select id="type-kopi">
+                                <option value="Panas">Panas</option>
+                                <option value="Dingin (Es)">Dingin (Es)</option>
+                            </select>
+                        </div>
+                        <div class="quantity-control">
+                            <button onclick="changeQty('qty-kopi', -1)">-</button>
+                            <span id="qty-kopi">1</span>
+                            <button onclick="changeQty('qty-kopi', 1)">+</button>
+                        </div>
+                        <button class="btn-add" onclick="addToCartWithOptions('Kopi Bekucuk', 10000, 'qty-kopi', 'type-kopi')">Tambah</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Floating Cart Bar -->
+    <div class="cart-bar">
+        <div class="cart-info" onclick="toggleCartModal()">
+            <div class="cart-icon">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-count" id="cart-count">0</span>
+            </div>
+            <div>
+                <small style="color:#777;">Total Belanja:</small>
+                <div id="cart-total-price" style="font-weight: bold; color: var(--primary-color);">Rp 0</div>
+            </div>
+        </div>
+        <button class="btn-checkout" onclick="toggleCartModal()">
+            <i class="fa-solid fa-cash-register"></i> Lihat Pesanan
+        </button>
+    </div>
+
+    <!-- Modal Detail Keranjang & Form Checkout -->
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Keranjang Belanja</h3>
+                <button onclick="toggleCartModal()" style="border:none; background:none; font-size:1.2rem; cursor:pointer;">&times;</button>
+            </div>
+
+            <!-- List Produk Dalam Keranjang -->
+            <div id="cart-items-container">
+                <p style="text-align: center; color: #888;">Keranjang Anda masih kosong.</p>
+            </div>
+
+            <hr style="margin: 15px 0;">
+
+            <!-- Form Data Pemesan -->
+            <h4>Data Pemesan:</h4>
+            <div class="customer-form">
+                <input type="text" id="cust-name" placeholder="Nama Lengkap" required>
+                <textarea id="cust-address" rows="3" placeholder="Alamat Pengiriman Lengkap" required></textarea>
+                <textarea id="cust-notes" rows="2" placeholder="Catatan Tambahan (Opsional) Ex: Kereca pedas banget"></textarea>
+            </div>
+
+            <div style="margin-top: 15px; font-weight: bold; font-size: 1.1rem; display: flex; justify-content: space-between;">
+                <span>Total Biaya:</span>
+                <span id="modal-total" style="color: var(--primary-color);">Rp 0</span>
+            </div>
+
+            <button class="btn-checkout" style="width: 100%; margin-top: 15px; justify-content: center;" onclick="sendToWhatsApp()">
+                <i class="fa-brands fa-whatsapp" style="font-size: 1.3rem;"></i> Kirim Pesanan via WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Data nomor WhatsApp toko
+        const whatsappNumber = "628882010502227";
+
+        // State Keranjang
+        let cart = [];
+
+        // Mengubah Angka Jumlah (Qty)
+        function changeQty(elementId, delta) {
+            const el = document.getElementById(elementId);
+            let current = parseInt(el.innerText);
+            current += delta;
+            if (current < 1) current = 1;
+            el.innerText = current;
+        }
+
+        // Tambah ke Keranjang Standar
+        function addToCart(name, price, qtyId) {
+            const qty = parseInt(document.getElementById(qtyId).innerText);
+            
+            // Cek apakah item sudah ada di keranjang
+            const existingIndex = cart.findIndex(item => item.name === name);
+            if (existingIndex > -1) {
+                cart[existingIndex].qty += qty;
+            } else {
+                cart.push({ name, price, qty });
+            }
+
+            // Reset Qty Selector kembali ke 1
+            document.getElementById(qtyId).innerText = 1;
+            
+            updateCartUI();
+            alert(`${name} (${qty}) berhasil ditambahkan ke keranjang!`);
+        }
+
+        // Tambah ke Keranjang dengan Opsi (Panas/Dingin)
+        function addToCartWithOptions(baseName, price, qtyId, selectId) {
+            const qty = parseInt(document.getElementById(qtyId).innerText);
+            const option = document.getElementById(selectId).value;
+            const fullName = `${baseName} (${option})`;
+
+            const existingIndex = cart.findIndex(item => item.name === fullName);
+            if (existingIndex > -1) {
+                cart[existingIndex].qty += qty;
+            } else {
+                cart.push({ name: fullName, price, qty });
+            }
+
+            document.getElementById(qtyId).innerText = 1;
+            updateCartUI();
+            alert(`${fullName} (${qty}) berhasil ditambahkan ke keranjang!`);
+        }
+
+        // Hapus Item Keranjang
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        // Update Tampilan UI Keranjang
+        function updateCartUI() {
+            const cartCountEl = document.getElementById('cart-count');
+            const cartTotalPriceEl = document.getElementById('cart-total-price');
+            const modalTotalEl = document.getElementById('modal-total');
+            const cartContainer = document.getElementById('cart-items-container');
+
+            // Hitung total item & harga
+            let totalCount = 0;
+            let totalPrice = 0;
+
+            cart.forEach(item => {
+                totalCount += item.qty;
+                totalPrice += (item.price * item.qty);
+            });
+
+            cartCountEl.innerText = totalCount;
+            cartTotalPriceEl.innerText = `Rp ${totalPrice.toLocaleString('id-ID')}`;
+            modalTotalEl.innerText = `Rp ${totalPrice.toLocaleString('id-ID')}`;
+
+            // Render daftar belanja dalam Modal
+            if (cart.length === 0) {
+                cartContainer.innerHTML = `<p style="text-align: center; color: #888;">Keranjang Anda masih kosong.</p>`;
+            } else {
+                cartContainer.innerHTML = cart.map((item, index) => `
+                    <div class="cart-item">
+                        <div class="cart-item-detail">
+                            <div class="cart-item-title">${item.name}</div>
+                            <div class="cart-item-price">${item.qty} x Rp ${item.price.toLocaleString('id-ID')} = Rp ${(item.qty * item.price).toLocaleString('id-ID')}</div>
+                        </div>
+                        <button class="btn-remove" onclick="removeFromCart(${index})">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Buka / Tutup Modal
+        function toggleCartModal() {
+            const modal = document.getElementById('cartModal');
+            modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
+        }
+
+        // Format & Kirim Pesanan via WhatsApp
+        function sendToWhatsApp() {
+            if (cart.length === 0) {
+                alert("Keranjang belanja Anda masih kosong!");
+                return;
+            }
+
+            const name = document.getElementById('cust-name').value.trim();
+            const address = document.getElementById('cust-address').value.trim();
+            const notes = document.getElementById('cust-notes').value.trim();
+
+            if (!name || !address) {
+                alert("Mohon isi Nama Lengkap dan Alamat Pengiriman!");
+                return;
+            }
+
+            // Membangun Pesan Teks
+            let text = `Halo *Warung Bekucuk*, Saya ingin memesan:\n\n`;
+            
+            let total = 0;
+            cart.forEach((item, i) => {
+                const itemTotal = item.price * item.qty;
+                total += itemTotal;
+                text += `${i + 1}. *${item.name}* x ${item.qty} = Rp ${itemTotal.toLocaleString('id-ID')}\n`;
+            });
+
+            text += `\n*Total Pembayaran:* Rp ${total.toLocaleString('id-ID')}\n\n`;
+            text += `*Data Pemesan:*\n`;
+            text += `• Nama: ${name}\n`;
+            text += `• Alamat: ${address}\n`;
+            if (notes) {
+                text += `• Catatan: ${notes}\n`;
+            }
+
+            // Encode pesan untuk URL WA
+            const encodedText = encodeURIComponent(text);
+            const waUrl = `https://wa.me/${whatsappNumber}?text=${encodedText}`;
+
+            // Redirect ke WhatsApp
+            window.open(waUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
